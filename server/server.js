@@ -23,23 +23,6 @@ app.disable("x-powered-by"); // it will remove the x-powered-by header from the 
 // Sanitize user input to prevent MongoDB Operator Injection
 app.use(mongoSanitize());
 
-// Custom Content Security Policy (CSP)
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "example.com", "scaler.com"], // Allow scripts from 'self', example.com, and scaler.com
-      styleSrc: ["'self'", "'unsafe-inline'"], // Allow inline styles (unsafe)
-      // imgSrc: ["'self'", "data:", "example.com"], // Allow images from 'self', data URLs, and example.com
-      imgSrc: ["'self'", "data:", "example.com", "upload.wikimedia.org", "m.media-amazon.com", "via.placeholder.com"],
-      connectSrc: ["'self'", "api.example.com"], // Allow connections to 'self' and api.example.com
-      fontSrc: ["'self'", "fonts.gstatic.com"], // Allow fonts from 'self' and fonts.gstatic.com
-      objectSrc: ["'none'"], // Disallow object, embed, and applet elements
-      upgradeInsecureRequests: [], // Upgrade insecure requests to HTTPS
-    },
-  })
-);
-
 // Rate Limiter Middleware
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes

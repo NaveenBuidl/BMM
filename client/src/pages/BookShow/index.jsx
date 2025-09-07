@@ -10,10 +10,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import PaymentForm from '../../components/PaymentForm';
 import { bookShow } from "../../apicalls/bookings";
 
-
-// const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
-console.log('Stripe Key:', import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 function BookShow() {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
