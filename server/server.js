@@ -25,9 +25,10 @@ app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
-        defaultSrc: ["'self'"],
+        defaultSrc: ["'self'", "https://js.stripe.com"],
         scriptSrc: ["'self'", "https://js.stripe.com"],
-        imgSrc: ["*"], // Allow images from any source
+        imgSrc: ["*"],
+        frameSrc: ["'self'", "https://js.stripe.com"], // Add this line
         // add other directives as needed
       },
     },
