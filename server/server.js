@@ -17,11 +17,22 @@ require("./config/db.js");
 
 const app = express();
 
-app.use(helmet());
 app.disable("x-powered-by"); // it will remove the x-powered-by header from the response
 
 // Sanitize user input to prevent MongoDB Operator Injection
 app.use(mongoSanitize());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "https://js.stripe.com"],
+        imgSrc: ["*"], // Allow images from any source
+        // add other directives as needed
+      },
+    },
+  })
+);
 
 // Rate Limiter Middleware
 const apiLimiter = rateLimit({
